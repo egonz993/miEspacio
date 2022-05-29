@@ -1,0 +1,82 @@
+@Output()
+Enviar datos de hijo a padre
+
+1) En el componenteHijo.ts
+
+Importamos las librerias Output y EventEmitter
+  >>import { Output, EventEmitter } from '@angular/core';
+
+Colocamos el decorador @Output() de la siguiente manera:
+  >>@Output() newItemEvent = new EventEmitter<string>();
+              *****(1)****
+
+	(1) Variable que contiene la información a compartir 
+
+
+
+Creamos la función addNewItem (o cualquier otro nombre)
+  >>addNewItem(value: string) { this.newItemEvent.emit(value); }
+    ****(2)*** *****(3)*****         ------1-----     ---3---
+
+
+	(2) Funcion que recibe el dato que será compartido
+	(3) Valor compartido
+
+
+
+2) En el componenteHijo.html
+
+Maquetamos el HTML colocando un botón que se encargue de ejecutar el evento
+
+	<label for="item-input">Add an item:</label>
+	<input type="text" id="item-input" #newItem>
+	<button (click)="addNewItem(newItem.value)">Add to parent's list</button>
+                         -----2---- *****(5)*****
+
+	(5) Dato ingresado que se comparte
+
+
+
+3) En el componentePadre.ts
+
+Creamos la variable que modificaremos desde el componente hijo
+  >>items = ['item1', 'item2', 'item3', 'item4'];
+    **(6)**
+
+	(6) Variable en el componente padre que recibirá los datos compartidos
+
+
+Creamos la función que será ejecutada para cambiar la variable
+
+  addItem(newItem: string) { this.items.push(newItem); }
+  **(7)**  ******(8)*****
+
+	(7) Función que recibe el dato en el componente padre
+	(8) Dato recibido en el componente padre
+
+
+
+4) En el componentePadre.html
+
+Maquetamos el HTML colocando como propiedad del componente hijo
+el evento que ejecutará la función decorada en el @Output() del hijo
+
+	<componente-hijo (newItemEvent)="addItem($event)"></componente-hijo>
+                          -----1-----   ---7---
+
+
+Colocamos un elemento en el que se muestren los resultados de la variable recibida
+
+	<ul><li *ngFor="let item of items">{{item}}</li></ul>
+                                    ---6---
+
+
+
+
+
+# - variable declaration
+() - event binding
+[] - property binding
+[()] - two-way property binding
+{{ }} - interpolation
+* - structural directives

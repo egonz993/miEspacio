@@ -1,0 +1,52 @@
+@Input()
+Enviar datos de padre a hijo
+
+1) En el componenteHijo.ts
+
+Importamos la libreria Input
+  >>import { Input } from '@angular/core';
+
+Colocamos el decorador @Input() de la siguiente manera:
+
+  >>@Input() item: string;
+             *****(1)****
+
+	(1) Variable recibe el valor compartido
+
+
+2) En el componenteHijo.html
+
+Maquetamos el HTML colocando la variable creada para mostrarla por Interpolación
+
+  >><p>La variable compartida es: {{item}}</p>
+                                  ----1----
+
+
+3) en el ComponentePadre.ts
+
+Creamos la variable que contiene el valor a compartir
+
+	>>currentItem = 'Television';
+         *****(2)****
+
+	(2) Variable con el dato a compartir
+
+4) En el componentePadre.html
+
+Agregamos el componente hijo enviando el valor por un Properti bindin
+
+	<app-input [item] = "currentItem"></app-input>
+                   ---1--    -----2-----
+
+
+
+
+
+
+
+# - variable declaration
+() - event binding
+[] - property binding
+[()] - two-way property binding
+{{ }} - interpolation
+* - structural directives

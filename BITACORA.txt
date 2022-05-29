@@ -1,0 +1,715 @@
+BITACORA APP MI ESPACIO
+
+********************************
+********** 2021-05-06 **********
+********************************
+
+PRIMEROS PASOS
+
+1) Instalar vía npm Angular CLI: 11.2.12
+npm install -g @angular/cli
+
+
+2) Se crea una carpeta en Escritorio y se Ejecuta el CMD en la ruta de la carpeta creada
+C:\Users\salva\OneDrive\Escritorio\VPN Mi Espacio
+
+
+3) Desde la consola creamos la carpeta "app" con todas las librerias y componentes de angular, tarda varios minutos, se ejecuta el comando
+ng new app
+
+***Esto creara la carpeta "app" con todas las librerias y componentes de angular, tarda varios minutos
+
+
+4) Entramos en la carpeta creada
+cd app
+
+C:\Users\salva\OneDrive\Escritorio\VPN Mi Espacio\app
+
+
+5) LISTO, YA ESTA LA CARPETA CREADA CON TODOS SUS COMPONENTES
+
+
+
+
+
+********************************
+********** 2021-05-01 **********
+********************************
+
+CONFIGURANDO EL TEMA AdminLTE
+
+
+
+1) Instalamos el AdminLTE desde la linea de comandos vía npm
+npm install admin-lte --save
+
+
+2) En el archivo angular.json agragamos las rutas de los CSS y JS del tema AdminLTE
+
+            "styles": [
+              "src/styles.css",
+              "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
+              "node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "node_modules/admin-lte/plugins/jqvmap/jqvmap.min.css",
+              "node_modules/admin-lte/dist/css/adminlte.min.css",
+              "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "node_modules/admin-lte/plugins/daterangepicker/daterangepicker.css",
+              "node_modules/admin-lte/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "node_modules/admin-lte/plugins/jquery/jquery.min.js",
+              "node_modules/admin-lte/plugins/jquery-ui/jquery-ui.min.js",
+              "node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "node_modules/admin-lte/plugins/chart.js/Chart.min.js",
+              "node_modules/admin-lte/plugins/sparklines/sparkline.js",
+              "node_modules/admin-lte/plugins/jqvmap/jquery.vmap.min.js",
+              "node_modules/admin-lte/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "node_modules/admin-lte/plugins/jquery-knob/jquery.knob.min.js",
+              "node_modules/admin-lte/plugins/moment/moment.min.js",
+              "node_modules/admin-lte/plugins/daterangepicker/daterangepicker.js",
+              "node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "node_modules/admin-lte/plugins/summernote/summernote-bs4.min.js",
+              "node_modules/admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
+              "node_modules/admin-lte/dist/js/adminlte.js"
+            ]
+
+
+
+3) En el index.html se agregan las clases del AdminLTE al body
+  <body class="hold-transition sidebar-mini layout-fixed">
+
+Y las etiquetas para los iconos  
+  <link rel="icon" type="image/png" href="assets/dist/img/logoVPN_round.png" sizes="16x16">
+  <link rel="shortcut icon" href="assets/dist/img/logoVPN_round.png" />
+  <link rel="apple-touch-icon" href="assets/dist/img/logoVPN_round.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/dist/img/logoVPN_round.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="assets/dist/img/logoVPN_round.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="assets/dist/img/logoVPN_round.png" />
+
+
+4) Creamos los siguientes componentes en angular desde la consola de VSCode
+
+ng g c pages/dashboard
+ng g c pages/dashboard/sections/preloader
+ng g c pages/dashboard/sections/content
+ng g c pages/dashboard/sections/controlbar
+ng g c pages/dashboard/sections/foot
+ng g c pages/dashboard/sections/sidebar
+ng g c pages/dashboard/sections/topbar
+
+ng g c pages/signing
+ng g c pages/signing/sections/userlogin
+ng g c pages/signing/sections/userregister
+
+
+5) Editamos el archivo app.component.html, borrar todo y copiar lo siguiente
+  
+  <!--
+    <app-signin></app-signin>
+    <app-dashboard></app-dashboard>
+  -->   
+  <p>router-outlet</p>
+  <router-outlet></router-outlet>
+
+
+
+6) Desde la Terminal Abrimos el proyecto como un servidor local
+ng serve --open				Abreviado (ng s --o)
+
+O tambien
+ng serve --live-reload			(Para actualizar en tiempo real)
+
+
+
+7) Desde el Chrome abrimos el enlace
+localhost:4200
+
+***Debe verse en el screen solo el texto "router-outlet"
+
+
+8) Probamos que funcione añadiendo al index.html el siguiente elemento
+    <app-signin></app-signin>
+
+***Debe verse en el screen solo el texto "signing works!"
+
+
+9) Modificamos las vistas de login, register en los componentes
+
+--> En userlogin.component.html se Copia el contenido de Login que tiene de ejemplo del tema AdminLTE
+Solo el div con clase "card" con su contenido
+	node_modules/admin-lte/pages/examples/login.html
+
+--> En userregister.component.html se Copia el contenido de Register que tiene de ejemplo del tema AdminLTE
+Solo el div con clase "card" con su contenido
+	node_modules/admin-lte/pages/examples/register.html
+
+
+
+10) Modificar los ngOnInit() de login y register, para añadir al body la clase necesaria segun el tema
+
+--> userlogin.component.ts
+
+  ngOnInit(): void {
+    document.body.classList.add(login-page');
+  }
+
+
+--> userregister.component.ts
+
+  ngOnInit(): void {
+    document.body.classList.add('register-page');
+  }
+
+
+------>> Este paso se puede omitir al agregar un DIV con clase 'login-page' o 'register-page' y meter el contenido ahi.
+
+
+
+11) Probamos que funcione añadiendo al signing.component.html el siguiente elemento
+
+Primero
+    <app-login></app-login>
+
+Segundo
+    <app-register></app-register>
+
+
+
+
+12) Probamos que funcione añadiendo al index.html el siguiente elemento
+    <app-dashboard></app-dashboard>
+
+***Debe verse en el screen solo el texto "dashboard works!"
+
+
+13) Modificamos la vista de dashboard
+
+--> En dashboard.component.html se agregan los elementos que llevara esta vista,
+Se colocan en un div con clase "wrapper" para ir de acuerdo al tema AdminLTE
+
+<div class="wrapper">
+    <app-preloader></app-preloader>
+    <app-topbar></app-topbar>
+    <app-sidebar></app-sidebar>
+    <app-content></app-content>
+    <app-foot></app-foot>
+    <app-controlbar></app-controlbar>
+</div>
+
+
+***PROBAMOS QUE TODO FUNCIONE
+
+
+14) Editamos los HTML de cada una de las secciones del Dashboard
+
+--> preloader.component.html
+--> topbar.component.html
+--> sidebar.component.html
+--> content.component.html
+--> foot.component.html
+--> controlbar.component.html
+
+Todos ellos los sacamos del tema original, y lo editamos a nuestro gusto
+	node_modules/admin-lte/pages/examples/index.html
+
+
+
+15) Compilar de nuevo para que se actualicen los cambios
+ng s --live-reload
+
+***PROBAMOS QUE TODO FUNCIONE
+
+
+
+********************************
+********** 2021-05-07 **********
+********************************
+
+ENRUTAMIENTO
+
+1) Importamos el modulo de Router, en el app.module.ts
+import { RouterModule, Routes } from '@angular/router';
+
+
+2) Creamos la variable que contiene las rutas
+
+  const rutas:Routes = [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'signin'
+    },
+    {
+      path: 'signin',
+      component: SigningComponent
+    }
+    ,
+    {
+      path: 'dashboard',
+      component: DashboardComponent
+    }
+
+3) En la seccion de imports del @ngModule editamos el RouterModule, colocando la variable rutas
+
+  imports: [
+    ..
+    ..
+    RouterModule.forRoot(rutas)
+  ]
+
+
+4) Probamos que funcione accediendo a las rutas creadas directamente desde la barra del navegador
+
+>> localhost:4200/dashboard
+>> localhost:4200/signin
+
+
+
+5) Editamos el RouterModule, agregando las siguientes propiedades
+
+    RouterModule.forRoot(rutas, {
+      enableTracing: true,
+      paramsInheritanceStrategy: 'always',
+      useHash: true
+    })
+
+
+  --> enableTracing: true			Permite mejor debugging al imprimir por consola ciclos de vida del ruteo
+  --> paramsInheritanceStrategy: 'always'	Para que los datos que pasemos se hereden de padres a hijos
+  --> useHash: true				Para mejorar el direccionamiento en los servidores y evitar error 404
+
+
+
+6) Creamos las subrutas para Signin, la variable 'rutas' queda así
+
+  const rutas:Routes = [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'signin'
+    },
+    {
+      path: 'signin',
+      component: SigningComponent,
+      children:[
+        {
+          path: '',
+          pathMatch: 'prefix',
+          redirectTo: 'register'
+        },
+        {
+          path: 'login',
+          component: UserloginComponent
+        },
+        {
+          path: 'register',
+          component: UserregisterComponent
+        }
+      ]
+    },
+    {
+      path: 'dashboard',
+      component: DashboardComponent
+    }
+]
+
+
+----> Recordar colocar el <router-outlet></router-outlet> en la pagina de signin
+
+
+
+7) Se agrega el direccionamiento por enlaces, sustituyendo la propiedad 'href' por 'routerLink'
+
+Paginas modificadas:
+--> userlogin
+--> userregister
+--> topbar
+--> sidebar
+
+
+8) Compilar de nuevo para que se actualicen los cambios
+ng s --live-reload
+
+
+***PROBAMOS QUE TODO FUNCIONE
+
+Observaciones
+El sidebar no esta haciendo scroll cuando se cambia de 'signin' a 'dashboard'; se arregla luego de recargar
+
+
+
+
+
+
+********************************
+********** 2021-05-09 **********
+********************************
+
+CREAR LAS VISTAS DEL DASHBOARD Y HACER EL ENRUTAMIENTO CON EL SIDEBAR
+
+
+1) En el dashboard.components.html
+Reemplazamos la etiqueta content por un Router-Outlet
+
+
+2) En el content.component.html
+Colocamos un Router-Outlet en el área del contenido
+
+
+3) Creamos los siguientes componentes:
+
+ng g c pages/dashboard/sections/content/mi-espacio
+ng g c pages/dashboard/sections/content/admin
+ng g c pages/dashboard/sections/content/reservas
+ng g c pages/dashboard/sections/content/celebraciones
+ng g c pages/dashboard/sections/content/calendario
+ng g c pages/dashboard/sections/content/galeria
+ng g c pages/dashboard/sections/content/devocionales
+ng g c pages/dashboard/sections/content/estudio-biblico
+ng g c pages/dashboard/sections/content/discipulados
+ng g c pages/dashboard/sections/content/ministerios
+ng g c pages/dashboard/sections/content/grupos
+ng g c pages/dashboard/sections/content/config
+
+
+4) Creamos las subrutas para Signin, la variable 'rutas' queda así
+
+  const rutas:Routes = [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'dashboard'
+    },
+    {
+      path: 'signin',
+      component: SigningComponent,
+      children:[
+        {
+          path: '',
+          pathMatch: 'prefix',
+          redirectTo: 'register'
+        },
+        {
+          path: 'login',
+          component: UserloginComponent
+        },
+        {
+          path: 'register',
+          component: UserregisterComponent
+        }
+      ]
+    },
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
+      children:[
+        {
+          path: '',
+          pathMatch: 'prefix',
+          redirectTo: 'content'
+        },
+        {
+          path: 'content',
+          component: ContentComponent,
+          children:[
+            {
+              path: '',
+              pathMatch: 'prefix',
+              redirectTo: 'mi-espacio'
+            },
+            {
+              path: 'mi-espacio',
+              component: MiEspacioComponent
+            },
+            {
+              path: 'admin',
+              component: AdminComponent
+            },
+            {
+              path: 'reservas',
+              component: ReservasComponent
+            },
+            {
+              path: 'celebraciones',
+              component: CelebracionesComponent
+            },
+            {
+              path: 'calendario',
+              component: CalendarioComponent
+            },
+            {
+              path: 'galeria',
+              component: GaleriaComponent
+            },
+            {
+              path: 'devocionales',
+              component: DevocionalesComponent
+            },
+            {
+              path: 'estudio-biblico',
+              component: EstudioBiblicoComponent
+            },
+            {
+              path: 'discipulados',
+              component: DiscipuladosComponent
+            },
+            {
+              path: 'ministerios',
+              component: MinisteriosComponent
+            },
+            {
+              path: 'grupos',
+              component: GruposComponent
+            },
+            {
+              path: 'config',
+              component: ConfigComponent
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+
+5) LOS CAMBIOS HASTA ESTA VERSION QUEDAN GUARDADOS EN: src 20210509_0849
+
+********************************
+********** 2021-05-09 **********
+********************************
+
+VINCULAR CON FIREBASE
+
+
+1) En el modulo enviroment.ts copiamos el siguiente codigo
+
+  export const environment = {
+    production: false,
+    firebaseConfig : {
+      apiKey: "AIzaSyCBUVTzF6KHxlub1qQQvBUKCABf_TnZAxU",
+      authDomain: "vpn-miespacio.firebaseapp.com",
+      databaseURL: "https://vpn-miespacio-default-rtdb.firebaseio.com",
+      projectId: "vpn-miespacio",
+      storageBucket: "vpn-miespacio.appspot.com",
+      messagingSenderId: "482374126947",
+      appId: "1:482374126947:web:1d8eae59b6b9a337635756",
+      measurementId: "G-Y4J0H7SC28"
+    }
+  };
+
+
+2) Instalamos Firebase desde consola
+
+  >> ng add @angular/fire
+
+
+3) En el archivo app.module.ts  creamos las siguientes importaciones
+
+
+
+/* FIREBASE */
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+  imports: [
+    ..
+    ..
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    ..
+    ..
+  ],
+
+
+
+4) Desde la consola
+
+  >> firebase init
+     --> * You are initializing in an existing Firebase project directory: Y
+     --> Escoger Hostig 
+     --> Use an existing project:	---> vpn-miespacio (VPN-miEspacio)
+     --> ? What do you want to use as your public directory?:	---> dist
+     --> Configure as a single-page app (rewrite all urls to /index.html)? (y/N) 	---> N
+     --> Set up automatic builds and deploys with GitHub? (y/N) 	---> N
+
+  >> firebase deploy
+     --> https://vpn-miespacio.web.app
+
+
+5) Copiamos el contenido del archivo enviroment.ts  y lo pegamos en enviroment.prod.ts  cambiando a modo producción
+
+  export const environment = {
+    production: true,
+    firebaseConfig : {
+      apiKey: "AIzaSyCBUVTzF6KHxlub1qQQvBUKCABf_TnZAxU",
+      authDomain: "vpn-miespacio.firebaseapp.com",
+      databaseURL: "https://vpn-miespacio-default-rtdb.firebaseio.com",
+      projectId: "vpn-miespacio",
+      storageBucket: "vpn-miespacio.appspot.com",
+      messagingSenderId: "482374126947",
+      appId: "1:482374126947:web:1d8eae59b6b9a337635756",
+      measurementId: "G-Y4J0H7SC28"
+    }
+  };
+
+
+
+6) En el archivo firebase.json cambiamos la ruta public a la generada por angular en produccion
+
+  >> "public": "dist/app",
+
+
+
+7) Hacemos denuevo el deploy y probamos en el enlace
+
+  >> firebase deploy
+     --> https://vpn-miespacio.web.app
+
+
+
+8) LOS CAMBIOS HASTA ESTA VERSION QUEDAN GUARDADOS EN: app 20210509_1851
+   >> Sin la carpeta de 'node_modules'
+   >> Guardados en el Google Drive de tumundomaker
+
+
+
+********************************
+********** 2021-05-15 **********
+********************************
+
+1) Se modifico el content.component.html y .ts para que actualice la ruta en cada cambio de URL
+
+  Es necesario importar libreria desde rjx
+  >>import { filter } from 'rxjs/operators';
+
+  Cambiar el constructor
+  >>constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  Luego crear las funciones necesarias
+
+
+
+2) Se refactorizo el codigo en varias partes para mejorar la imagen y la experiencia
+
+
+
+
+3) LOS CAMBIOS HASTA ESTA VERSION QUEDAN GUARDADOS EN: src 20210509_0849
+
+
+
+********************************
+********** 2021-05-15 **********
+********************************
+
+1) Agregamos componente para pagina de usuario
+   >>ng g c pages/dashboard/sections/content/user
+
+2) Agregamos componente "widgets" para pagina de mi espacio
+   >>ng g c widgets/user-card
+   >>ng g c widgets/timeline
+
+3) Agregamos el enrutamiento para el componente creado
+
+
+4) Maquetamos el widget user-card.component.html
+
+
+5) Agregamos componente "widgets" para pagina de calendario
+   >>ng g c widgets/fullcalendar
+
+
+6) Importamos fullCalendar a Angular
+npm install --save @fullcalendar/angular @fullcalendar/interaction
+npm install --save @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/list
+
+dayGridMonth, dayGridWeek, dayGridDay, dayGrid
+timeGridWeek, timeGridDay, timeGrid
+listYear, listMonth, listWeek, listDay, list
+
+
+
+
+En el app.module.ts importamos las librerias
+
+
+	import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+	import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+	import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+	import { AppComponent } from './app.component';
+
+	FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+	  dayGridPlugin,
+	  interactionPlugin
+	]);
+
+En el componente calendario.html colocamos el elemtento
+
+En el componente full-calendar.html colocamos el widget
+   <app-full-calendar></app-full-calendar>
+
+En el componente full-calendar.ts importamos
+   >>import { CalendarOptions } from '@fullcalendar/angular';
+
+Y tambien inicializamos el calendario con unos eventos aleatorios
+
+
+
+7) Build y Deploy
+ng build --prod
+firebase deploy
+
+
+Al momento de hacer el build, angular arrojo un error por tamaño de archivos... se soluciono aumentando los valores en los budgets de angular.js 
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "5mb"
+                }
+              ]
+
+
+
+8) De nuevo Build y Deploy
+ng build --prod
+firebase deploy
+
+
+
+3) LOS CAMBIOS HASTA ESTA VERSION QUEDAN GUARDADOS EN: src 20210509_2327
+
+********************************
+********** 2021-05-17 **********
+********************************
+
+GALERIA SWIPER
+https://swiperjs.com/angular
+
+
+1) Creamos componente
+ng g c widgets/swiper-gallery
+
+
+2) Se importaron en angular.js los estilos y los js
+
+3) Se trabajo en el componente swiper-gallery
+	La hoja de estilos esta en '.scss' ya que asi la recomienda la libreria
+
+
+4) De nuevo Build y Deploy
+ng build --prod
+firebase deploy
+
+
+5) LOS CAMBIOS HASTA ESTA VERSION QUEDAN GUARDADOS EN: src 20210516_2312
