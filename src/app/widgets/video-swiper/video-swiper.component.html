@@ -1,0 +1,26 @@
+<ng-container *ngFor="let serie of videoSwiper">
+  <div class="card">
+    <div class="swiper-container">
+
+      <div class="card-header d-flex pl-2 p-1">
+        <h4 class="card-title">{{serie.serie}}</h4>
+      </div>
+      <swiper style="--swiper-navigation-color: #ccc" [loop]="false" [spaceBetween]="10" [navigation]="true"
+        (slideChange)="onSlideChange($event)" [slidesPerView]="3" class="mySwiper2 p-1">
+
+        <ng-container *ngFor="let video of serie.video">
+          <ng-template swiperSlide>
+            <a target="_blank" href="https://www.youtube.com/watch?v={{video.link}}">
+              <img src="https://img.youtube.com/vi/{{video.link}}/maxresdefault.jpg" />
+            </a>
+            <p class="text-sm">{{video.title}}</p>
+            <p class="text-sm m-0">{{video.date}}</p>
+          </ng-template>
+        </ng-container>
+
+
+      </swiper>
+
+    </div>
+  </div>
+</ng-container>

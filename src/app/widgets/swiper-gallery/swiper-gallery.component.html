@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center" style="width: 100%;">
+  <div class="card card-dark" style="width: 100%;">
+    <div class="card-header">
+      <h3 class="card-title">{{ gallery.title }}</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+        </button>
+      </div>
+      <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body" style="background: #000;">
+      <div class="d-lg-flex">
+        <div class="col-lg-6 mt-3">
+          <div class="swiper-container p-2" style="background: #000;">
+            <swiper style="--swiper-navigation-color: #fff" [loop]="false" [spaceBetween]="10" [navigation]="true"
+              [thumbs]="{ swiper: thumbsSwiper }" (slideChange)="onSlideChange($event)" [slidesPerView]="1"
+              class="mySwiper2">
+              <ng-container *ngFor="let img of gallery.images">
+                <ng-template swiperSlide>
+                  <img src={{img}} />
+                </ng-template>
+              </ng-container>
+            </swiper>
+
+            <swiper (swiper)="onSlideChange($event)" [loop]="false" [spaceBetween]="10" [slidesPerView]="6"
+              [freeMode]="true" [watchSlidesVisibility]="true" [watchSlidesProgress]="true"
+              class="mySwiper swiper-slide">
+              <ng-container *ngFor="let img of gallery.images; let index=index">
+                <ng-template swiperSlide>
+                  <img class="swiper-slide-thumb-active" src={{img}}
+                    [ngClass]="{'swiper-slide-thumb-active': (index===0), 'swiper-slide-thumb': (index!==0)}" />
+                </ng-template>
+              </ng-container>
+            </swiper>
+          </div>
+        </div>
+
+        <div class="container text-light col-lg-6 mt-3">
+          <h3>Descripcion</h3>
+          <p>{{ gallery.description }}</p>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</div>

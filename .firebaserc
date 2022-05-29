@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "vpn-miespacio": {
+      "hosting": {
+        "app": [
+          "vpn-miespacio"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "vpn-miespacio"
+  }
+}

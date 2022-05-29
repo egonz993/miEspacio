@@ -1,0 +1,7 @@
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background: linear-gradient(to right, #333, #666);
+}
+
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background: linear-gradient(to left, #ccc, #101010);
+}
