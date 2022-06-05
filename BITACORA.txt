@@ -14,7 +14,7 @@ npm install -g @angular/cli
 C:\Users\salva\OneDrive\Escritorio\VPN Mi Espacio
 
 
-3) Desde la consola creamos la carpeta "app" con todas las librerias y componentes de angular, tarda varios minutos, se ejecuta el comando
+3) Desde la consola NODE.JS CLI accedemos al directorio donde estara la app; y creamos desde el cli la carpeta "app" con todas las librerias y componentes de angular, tarda varios minutos, para eso se ejecuta el comando
 ng new app
 
 ***Esto creara la carpeta "app" con todas las librerias y componentes de angular, tarda varios minutos
